@@ -1,0 +1,13 @@
+{% extends "index.html" %}
+{%block content%}
+<div class="container">
+    <div class="row justify-content-center">
+      <h3>To do:</h3>
+      <ol>
+        {% for item in items %}
+        <li>{{item}}</li>
+        {% endfor %}
+      </ol>
+    </div>
+  </div>
+{% endblock %}
