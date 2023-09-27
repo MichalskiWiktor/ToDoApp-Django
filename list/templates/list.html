@@ -5,8 +5,13 @@
       <h3>To do:</h3>
       <ol>
         {% for item in items %}
-        <li>{{item}}</li>
+        <li>
+          {{item}}
+          <a href="{% url 'update_item' item.id %}">Update Task</a>
+        </li>
         {% endfor %}
+        <a href="{% url 'new_item' %}">Add new Task</a>
+        
       </ol>
     </div>
   </div>
