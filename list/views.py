@@ -1,7 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
-from .forms import NewItemForm 
+from .forms import NewItemForm
 from .models import ListItem 
+
+# Fix the css
+# Change Status checkbox
 
 def showList(request):
     items = ListItem.objects.all()
@@ -29,6 +32,6 @@ def update_item(request, pk):
         return redirect("list")
     return render(request, "item_form.html", {"form": form})
 
-def delete_item(request):
-    return HttpResponse("New Item")
- 
+def delete_item(request, pk):
+    ListItem.objects.filter(id=pk).delete()
+    return redirect("list")

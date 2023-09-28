@@ -6,10 +6,6 @@
 {%block content%}
 
 <div class="container">
-    <h3>To do:</h3>
-    <div class="btnStyle newElementColor">
-      <a href="{% url 'new_item' %}">Add new Task</a>
-    </div>
     <ol>
       {% for item in items %}
       <li>
@@ -19,11 +15,14 @@
             <a href="{% url 'update_item' item.id %}">Update</a>
           </div>
           <div class="btnStyle deleteElementColor">
-            <a href="{% url 'update_item' item.id %}">Delete</a>
+            <a href="{% url 'delete_item' item.id %}">Delete</a>
           </div>
         </div>
       </li>
       {% endfor %}
     </ol>
+    <div class="btnStyle newElementColor">
+      <a href="{% url 'new_item' %} ">Add new Task</a>
+    </div>
   </div>
 {% endblock %}
