@@ -7,27 +7,24 @@
     border: 1px solid lightgray;
     border-radius: 10px;
   }
-  .newElement{
+  .btnStyle{
     padding:5px;
+    border-radius:3px;
+    text-align: center;
+    height:max-content;
+  }
+  .newElementColor{
     border:1px solid #00b74a;
-    border-radius:3px;
     background-color: #00b74a;
-    text-align: center;
   }
-  .updateElement{
-    padding:5px;
+  .updateElementColor{
     border:1px solid #1266f1;
-    border-radius:3px;
     background-color: #1266f1;
-    text-align: center;
   }
-  .deleteElement{
-    padding:5px;
+  .deleteElementColor{
     border:1px solid #f93154;
-    border-radius:3px;
     background-color: #f93154;
-    text-align: center;
-  }
+    }
   .textElement{
     margin-top: 1.3%;
   }
@@ -41,29 +38,43 @@
   }
   li{
     display: flex;
+    justify-content: space-between;
     margin:10px;
     width:90%;
     border-bottom: 1px solid lightgray;
+    margin:5px;
   }
   li > *{
     margin:5px;
+    }
+  .right-align { margin-left: auto; }
+  .buttons{
+    display: flex;
   }
+  .buttons > *{
+    align-self: center;
+    margin-left:5px;
+    margin-right:5px;
+  }
+
 
 </style>
 <div class="container">
     <h3>To do:</h3>
-    <div class="newElement">
+    <div class="btnStyle newElementColor">
       <a href="{% url 'new_item' %}">Add new Task</a>
     </div>
     <ol>
       {% for item in items %}
       <li>
         <div class="textElement">{{item}}</div>
-        <div class="updateElement">
-          <a href="{% url 'update_item' item.id %}">Update</a>
-        </div>
-        <div class="deleteElement">
-          <a href="{% url 'update_item' item.id %}">Delete</a>
+        <div class="buttons right-align">
+          <div class="btnStyle updateElementColor">
+            <a href="{% url 'update_item' item.id %}">Update</a>
+          </div>
+          <div class="btnStyle deleteElementColor">
+            <a href="{% url 'update_item' item.id %}">Delete</a>
+          </div>
         </div>
       </li>
       {% endfor %}
