@@ -1,7 +1,6 @@
 {% extends "index.html" %}
 {% block style %}
 <link rel="stylesheet" href="static/css/listStyle.css">
-
 {% endblock %}
 {%block content%}
 
@@ -9,6 +8,14 @@
     <ol>
       {% for item in items %}
       <li>
+        <form action="" method="post">
+          {% csrf_token %}
+          {% if item.status == True %}
+            <input type="checkbox" onclick="changeStatus('{{item.id}}')" name="statusCheckbox" id="status{{item.id}}" checked>
+          {% else %}
+            <input type="checkbox" onclick="changeStatus('{{item.id}}')" name="statusCheckbox" id="status{{item.id}}">
+          {% endif %}
+        </form>
         <div class="textElement">{{item}}</div>
         <div class="buttons right-align">
           <div class="btnStyle updateElementColor">
@@ -25,4 +32,23 @@
       <a href="{% url 'new_item' %} ">Add new Task</a>
     </div>
   </div>
+  <script>
+    function changeStatus(id)
+    {
+      const csrfToken = "{{ csrf_token }}";
+      const djangoEndpoint = 'change_status/';
+      const postData = {
+        key1: id,
+      };
+      fetch(djangoEndpoint, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-CSRFToken': csrfToken,
+        },
+        body: JSON.stringify(postData),
+      })
+    }
+  </script>
+  
 {% endblock %}
