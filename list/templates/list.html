@@ -5,33 +5,34 @@
 {%block content%}
 
 <div class="container">
-    <ol>
-      {% for item in items %}
-      <li>
-        <form action="" method="post">
-          {% csrf_token %}
-          {% if item.status == True %}
-            <input type="checkbox" onclick="changeStatus('{{item.id}}')" name="statusCheckbox" id="status{{item.id}}" checked>
-          {% else %}
-            <input type="checkbox" onclick="changeStatus('{{item.id}}')" name="statusCheckbox" id="status{{item.id}}">
-          {% endif %}
-        </form>
-        <div class="textElement">{{item}}</div>
-        <div class="buttons right-align">
-          <div class="btnStyle updateElementColor">
-            <a href="{% url 'update_item' item.id %}">Update</a>
-          </div>
-          <div class="btnStyle deleteElementColor">
-            <a href="{% url 'delete_item' item.id %}">Delete</a>
-          </div>
-        </div>
-      </li>
-      {% endfor %}
-    </ol>
-    <div class="btnStyle newElementColor">
-      <a href="{% url 'new_item' %} ">Add new Task</a>
-    </div>
+  <div class="row">
+      <div class="col-md-12">
+          <ol>
+              {% for item in items %}
+              <li>
+                  <form action="" method="post">
+                      {% csrf_token %}
+                      {% if item.status == True %}
+                      <input type="checkbox" onclick="changeStatus('{{item.id}}')" name="statusCheckbox"
+                          id="status{{item.id}}" checked>
+                      {% else %}
+                      <input type="checkbox" onclick="changeStatus('{{item.id}}')" name="statusCheckbox"
+                          id="status{{item.id}}">
+                      {% endif %}
+                  </form>
+                  <div class="textElement">{{item}}</div>
+                  <div class="buttons">
+                    <a href="{% url 'update_item' item.id %}"><button type="button" class="btn btn-warning">Update</button></a>
+                    <a href="{% url 'delete_item' item.id %}"><button type="button" class="btn btn-danger">Delete</button></a>
+                  </div>
+              </li>
+              {% endfor %}
+          </ol>
+      </div>
   </div>
+</div>
+
+
   <script>
     function changeStatus(id)
     {
